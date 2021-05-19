@@ -1,4 +1,4 @@
-Updated it for TBC. Only works for TBC beta and Classic PTR currently. Thanks to Chordsy and all previous contributers/maintainers.
+Updated it for TBC. Thanks to Chordsy and all previous contributers/maintainers.
 
 # Lorti UI Classic.
 
