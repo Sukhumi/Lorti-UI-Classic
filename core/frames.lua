@@ -326,7 +326,7 @@ local function OnEvent(self, event, addon)
 	
 	--UNREGISTER WHEN DONE 
 	
-	if (IsAddOnLoaded("Blizzard_TalentUI") and IsAddOnLoaded("Blizzard_TimeManager")) then
+	if (IsAddOnLoaded("Blizzard_TalentUI") and IsAddOnLoaded("Blizzard_TimeManager") and IsAddOnLoaded("Blizzard_TradeSkillUI")) then
 		self:UnregisterEvent(event)
 	end
 end
