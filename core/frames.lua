@@ -67,7 +67,7 @@
 	local CF=CreateFrame("Frame")
 	CF:RegisterEvent("PLAYER_ENTERING_WORLD")
 	CF:RegisterEvent("GROUP_ROSTER_UPDATE")
-
+	
 	hooksecurefunc('TargetFrame_CheckClassification', function(self, forceNormalTexture)
 		 local classification = UnitClassification(self.unit);
 		if ( classification == "minus" ) then
@@ -92,6 +92,18 @@
 		else
 			self.borderTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame")
 			self.borderTexture:SetVertexColor(.05, .05, .05)
+		end
+	end)
+	
+	hooksecurefunc('CompactPartyFrame_OnLoad', function ()
+		if not (IsAddOnLoaded("Shadowed Unit Frames") or IsAddOnLoaded("PitBull Unit Frames 4.0") or IsAddOnLoaded("X-Perl UnitFrames")) then
+			for _, region in pairs({CompactPartyFrame:GetChildren()}) do
+				for _, child in pairs({region:GetRegions()}) do
+					if child:IsObjectType("Texture") then
+						child:SetVertexColor(.05, .05, .05)
+					end
+				end
+			end
 		end
 	end)
 
@@ -170,14 +182,6 @@
 				MirrorTimer3Border,
 			}) do
 				v:SetVertexColor(.05, .05, .05)
-			end
-
-			for _, region in pairs({CompactPartyFrame:GetChildren()}) do
-				for _, child in pairs({region:GetRegions()}) do
-					if child:IsObjectType("Texture") then
-						child:SetVertexColor(.05, .05, .05)
-					end
-				end
 			end
 			for _, region in pairs({CompactRaidFrameManager:GetRegions()}) do
 				if region:IsObjectType("Texture") then
@@ -302,6 +306,18 @@ local function OnEvent(self, event, addon)
 		local _, a, b, c, d, _, _, _, _, _, e, f, g = PlayerTalentFrame:GetRegions()
 		
 		for _, v in pairs({a, b, c, d, e, f, g})do
+			v:SetVertexColor(.35, .35, .35)
+		end
+		
+        -- self:UnregisterEvent(event)
+    end
+	
+	--RECOLOR TRADESKILL
+	
+	if addon == "Blizzard_TradeSkillUI" then
+		local _, a, b, c, d, _, e, f, g, h = TradeSkillFrame:GetRegions()
+		
+		for _, v in pairs({ a, b, c, d, e, f, g, h})do
 			v:SetVertexColor(.35, .35, .35)
 		end
 		
