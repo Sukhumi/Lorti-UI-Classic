@@ -175,6 +175,7 @@
 				PartyMemberFrame3PetFrameTexture,
 				PartyMemberFrame4PetFrameTexture,
 				TargetFrameToTTextureFrameTexture,
+				FocusFrameToTTextureFrameTexture,
 				CastingBarFrame.Border,
 				TargetFrameSpellBar.Border,
 				MirrorTimer1Border,
