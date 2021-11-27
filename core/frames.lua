@@ -67,7 +67,7 @@
 	local CF=CreateFrame("Frame")
 	CF:RegisterEvent("PLAYER_ENTERING_WORLD")
 	CF:RegisterEvent("GROUP_ROSTER_UPDATE")
-
+	
 	hooksecurefunc('TargetFrame_CheckClassification', function(self, forceNormalTexture)
 		 local classification = UnitClassification(self.unit);
 		if ( classification == "minus" ) then
@@ -94,7 +94,7 @@
 			self.borderTexture:SetVertexColor(.05, .05, .05)
 		end
 	end)
-
+	
 	hooksecurefunc('CompactPartyFrame_OnLoad', function ()
 		if not (IsAddOnLoaded("Shadowed Unit Frames") or IsAddOnLoaded("PitBull Unit Frames 4.0") or IsAddOnLoaded("X-Perl UnitFrames")) then
 			for _, region in pairs({CompactPartyFrame:GetChildren()}) do
@@ -175,7 +175,6 @@
 				PartyMemberFrame3PetFrameTexture,
 				PartyMemberFrame4PetFrameTexture,
 				TargetFrameToTTextureFrameTexture,
-				FocusFrameToTTextureFrameTexture,
 				CastingBarFrame.Border,
 				TargetFrameSpellBar.Border,
 				MirrorTimer1Border,
@@ -219,11 +218,16 @@
 				_G["PartyMemberFrame"..i.."NotPresentIcon"]:Hide()
 				_G["PartyMemberFrame"..i.."NotPresentIcon"].Show = function() end
 			end
-			PlayerFrameGroupIndicator:SetAlpha(0)
-			PlayerHitIndicator:SetText(nil)
-			PlayerHitIndicator.SetText = function() end
-			PetHitIndicator:SetText(nil)
-			PetHitIndicator.SetText = function() end
+			
+			if(not cfg.displayHitIndicator) then
+			
+				PlayerFrameGroupIndicator:SetAlpha(0)
+				PlayerHitIndicator:SetText(nil)
+				PlayerHitIndicator.SetText = function() end
+				PetHitIndicator:SetText(nil)
+				PetHitIndicator.SetText = function() end
+			
+			end
 
 		else
 			CastingBarFrameBorder:SetVertexColor(.05,.05,.05)
@@ -278,83 +282,83 @@ local function OnEvent(self, event, addon)
 
     if addon == "Blizzard_TimeManager" then
 
-		for _, v in pairs({StopwatchFrame:GetRegions()})do
+		for _, v in pairs({StopwatchFrame:GetRegions()}) do
 			v:SetVertexColor(.35, .35, .35)
 		end
-
+		
 		local a, b, c = StopwatchTabFrame:GetRegions()
-		for _, v in pairs({a, b, c})do
+		for _, v in pairs({a, b, c}) do
 			v:SetVertexColor(.35, .35, .35)
 		end
-
+		
 		local a, b, c, d, e, f, g, h, i, j, k, l, n, o, p, q, r =  TimeManagerFrame:GetRegions()
-		for _, v in pairs({a, b, c, d, e, f, g, h, i, j, k, l, n, o, p, q, r})do
+		for _, v in pairs({a, b, c, d, e, f, g, h, i, j, k, l, n, o, p, q, r}) do
 			v:SetVertexColor(.35, .35, .35)
 		end
-
-		for _, v in pairs({TimeManagerFrameInset:GetRegions()})do
+		
+		for _, v in pairs({TimeManagerFrameInset:GetRegions()}) do
 			v:SetVertexColor(.65, .65, .65)
 		end
-
+		
         TimeManagerClockButton:GetRegions():SetVertexColor(.05, .05, .05)
         -- self:UnregisterEvent(event)
-
+		
     end
-
+	
 	--RECOLOR TALENTS
-
+	
 	if addon == "Blizzard_TalentUI" then
 		local _, a, b, c, d, _, _, _, _, _, e, f, g = PlayerTalentFrame:GetRegions()
-
-		for _, v in pairs({a, b, c, d, e, f, g})do
-			v:SetVertexColor(.35, .35, .35)
-		end
-
-        -- self:UnregisterEvent(event)
-    end
-
-	--RECOLOR TRADESKILL
-
-	if addon == "Blizzard_TradeSkillUI" then
-		local _, a, b, c, d, _, e, f, g, h = TradeSkillFrame:GetRegions()
-
-		for _, v in pairs({ a, b, c, d, e, f, g, h})do
+		
+		for _, v in pairs({a, b, c, d, e, f, g}) do
 			v:SetVertexColor(.35, .35, .35)
 		end
 		
         -- self:UnregisterEvent(event)
     end
-
-	-- Macro Frame
-
-	if addon == "Blizzard_MacroUI" then
-
-		local  a, b, _, c, d, _, e, _, _, _, _, f, g, h, i, j, k, _, _, l, m = MacroFrame:GetRegions()
-
-		for _, v in pairs({ a, b, c, d, e, f, g, h, i, j, k, l, m}) do
-			v:SetVertexColor(.35, .35, .35)
-		end
-
-		local childa = MacroPopupFrame:GetChildren()
-		local a, b, c, d, e, f, g, h = childa:GetRegions();
-
+	
+	--RECOLOR TRADESKILL
+	
+	if addon == "Blizzard_TradeSkillUI" then
+		local _, a, b, c, d, _, e, f, g, h = TradeSkillFrame:GetRegions()
+		
 		for _, v in pairs({ a, b, c, d, e, f, g, h}) do
 			v:SetVertexColor(.35, .35, .35)
 		end
+		
+        -- self:UnregisterEvent(event)
+    end
+	
+	-- Macro Frame
+	
+	if addon == "Blizzard_MacroUI" then
 
+		local  a, b, _, c, d, _, e, _, _, _, _, f, g, h, i, j, k, _, _, l, m = MacroFrame:GetRegions()
+		
+		for _, v in pairs({ a, b, c, d, e, f, g, h, i, j, k, l, m}) do
+			v:SetVertexColor(.35, .35, .35)
+		end
+		
+		local childa = MacroPopupFrame:GetChildren()
+		local a, b, c, d, e, f, g, h = childa:GetRegions();
+		
+		for _, v in pairs({ a, b, c, d, e, f, g, h}) do
+			v:SetVertexColor(.35, .35, .35)
+		end
+		
 	end
 
-	--UNREGISTER WHEN DONE
-
+	--UNREGISTER WHEN DONE 
+	
 	if (IsAddOnLoaded("Blizzard_TalentUI") and IsAddOnLoaded("Blizzard_TimeManager") and IsAddOnLoaded("Blizzard_TradeSkillUI") and IsAddOnLoaded("Blizzard_MacroUI")) then
 		self:UnregisterEvent(event)
 	end
 end
 
 
-local f = CreateFrame("Frame")
-f:RegisterEvent("ADDON_LOADED")
-f:SetScript("OnEvent", OnEvent)
+local blizzAddonRecolor = CreateFrame("Frame")
+blizzAddonRecolor:RegisterEvent("ADDON_LOADED")
+blizzAddonRecolor:SetScript("OnEvent", OnEvent)
 
  -- RECOLOR GRYPHONS
 for i,v in pairs({
@@ -417,27 +421,27 @@ for i,v in pairs({
 	  ContainerFrame5BackgroundTop,
 	  ContainerFrame5BackgroundMiddle1,
 	  ContainerFrame5BackgroundBottom,
-
+	
 	  ContainerFrame6BackgroundTop,
 	  ContainerFrame6BackgroundMiddle1,
 	  ContainerFrame6BackgroundBottom,
-
+	  
 	  ContainerFrame7BackgroundTop,
 	  ContainerFrame7BackgroundMiddle1,
 	  ContainerFrame7BackgroundBottom,
-
+	  
 	  ContainerFrame8BackgroundTop,
 	  ContainerFrame8BackgroundMiddle1,
 	  ContainerFrame8BackgroundBottom,
-
+	  
 	  ContainerFrame9BackgroundTop,
 	  ContainerFrame9BackgroundMiddle1,
 	  ContainerFrame9BackgroundBottom,
-
+	  
 	  ContainerFrame10BackgroundTop,
 	  ContainerFrame10BackgroundMiddle1,
 	  ContainerFrame10BackgroundBottom,
-
+	  
 	  ContainerFrame11BackgroundTop,
 	  ContainerFrame11BackgroundMiddle1,
 	  ContainerFrame11BackgroundBottom,
@@ -506,6 +510,7 @@ for _, v in pairs({a, b, c, d
 end
 
 -- Honor Frame
+
 local  a, b, c, d, _, _, e, f, g, h = HonorFrame:GetRegions()
 for _, v in pairs({a, b, c, d, e, f, g, h
 
@@ -515,8 +520,16 @@ end
 
 -- Social Frame
 
-local a, b, c, d, e, f, g, _, i, j, k, l, n, o, p, q, r, _, _ =  FriendsFrame:GetRegions()
+local a, b, c, d, e, f, g, _, i, j, k, l, n, o, p, q, r =  FriendsFrame:GetRegions()
 for _, v in pairs({a, b, c, d, e, f, g, h, i, j, k, l, n, o, p, q, r, FriendsFrameInset:GetRegions(), WhoFrameListInset:GetRegions()
+}) do
+	v:SetVertexColor(.35, .35, .35)
+end
+
+--Dressing Room
+local _, a, b, c, d =  DressUpFrame:GetRegions()
+for _, v in pairs({ a, b, c, d
+
 }) do
 	v:SetVertexColor(.35, .35, .35)
 end
@@ -550,7 +563,7 @@ end
  SpellBookFrame.Material:SetHeight(541)
  SpellBookFrame.Material:SetPoint('TOPLEFT', SpellBookFrame, 22, -74)
  SpellBookFrame.Material:SetVertexColor(.5, .5, .5)
-
+ 
  -- Quest Log
 local _, _, a, b, c, d = QuestLogFrame:GetRegions()
 for _, v in pairs({a, b, c, d

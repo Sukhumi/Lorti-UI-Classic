@@ -3,6 +3,7 @@
 ## Version: 1.1.0
 ## Title: Lorti UI Classic
 ## Notes: Darkens the default UI. Updated for Classic by Chordsy
+## SavedVariables: LortiSettings
 
 config.lua
 core\frames.lua

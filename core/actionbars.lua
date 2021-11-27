@@ -1,40 +1,46 @@
 ﻿  ---------------------------------------
   -- VARIABLES
   ---------------------------------------
-
   --get the addon namespace
   local addon, ns = ...
-
-  --get the config values
   local cfg = ns.cfg
-
-  local classcolor = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-  local dominos = IsAddOnLoaded("Dominos")
-  local bartender4 = IsAddOnLoaded("Bartender4")
-
+  
   if cfg.color.classcolored then
-    cfg.color.normal = classcolor
+	cfg.color.normal = classcolor
   end
 
   --backdrop settings
   local bgfile, edgefile = "", ""
-  if cfg.background.showshadow then edgefile = cfg.textures.outer_shadow end
-  if cfg.background.useflatbackground and cfg.background.showbg then bgfile = cfg.textures.buttonbackflat end
+  if cfg.background.showshadow then 
+  	edgefile = cfg.textures.outer_shadow
+  end
+	
+  if cfg.background.useflatbackground and cfg.background.showbg then 
+  	bgfile = cfg.textures.buttonbackflat 
+  end
 
   --backdrop
   local backdrop = {
-    bgFile = bgfile,
-    edgeFile = edgefile,
-    tile = false,
-    tileSize = 32,
-    edgeSize = cfg.background.inset,
-    insets = {
-      left = cfg.background.inset,
-      right = cfg.background.inset,
-      top = cfg.background.inset,
-      bottom = cfg.background.inset,
-    },
-  }
+  	bgFile = bgfile,
+  	edgeFile = edgefile,
+  	tile = false,
+  	tileSize = 32,
+  	edgeSize = cfg.background.inset,
+  	insets = {
+  		left = cfg.background.inset,
+  		right = cfg.background.inset,
+  		top = cfg.background.inset,
+  		bottom = cfg.background.inset,
+  		}
+  	}
+
+
+  local classcolor = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+  local dominos = IsAddOnLoaded("Dominos")
+  local bartender4 = IsAddOnLoaded("Bartender4")
+  
+  
+
 
   ---------------------------------------
   -- FUNCTIONS
@@ -332,6 +338,39 @@ end
   ---------------------------------------
 
   local function init()
+
+	--get the config values
+	cfg = ns.cfg
+	
+	if cfg.color.classcolored then
+		cfg.color.normal = classcolor
+	end
+
+	--backdrop settings
+	bgfile, edgefile = "", ""
+	if cfg.background.showshadow then 
+		edgefile = cfg.textures.outer_shadow
+	end
+	
+	if cfg.background.useflatbackground and cfg.background.showbg then 
+		bgfile = cfg.textures.buttonbackflat 
+	end
+
+  --backdrop
+	backdrop = {
+		bgFile = bgfile,
+		edgeFile = edgefile,
+		tile = false,
+		tileSize = 32,
+		edgeSize = cfg.background.inset,
+		insets = {
+			left = cfg.background.inset,
+			right = cfg.background.inset,
+			top = cfg.background.inset,
+			bottom = cfg.background.inset,
+			}
+		}
+	
     --style the actionbar buttons
     for i = 1, NUM_ACTIONBAR_BUTTONS do
       styleActionButton(_G["ActionButton"..i])

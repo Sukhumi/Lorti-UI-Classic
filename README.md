@@ -1,5 +1,3 @@
-Updated it for TBC. Thanks to Chordsy and all previous contributers/maintainers.
-
 # Lorti UI Classic.
 
 Darkens the default UI.

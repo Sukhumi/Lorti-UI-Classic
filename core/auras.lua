@@ -1,7 +1,7 @@
 ﻿--get the addon namespace
-local addon, ns = ...
+--local addon, ns = ...
 --get the config values
-local cfg = ns.cfg
+--local cfg = ns.cfg
 
  ---------------------------------------
  -- LOCALS
@@ -91,12 +91,12 @@ local function applycastSkin(b)
       	border:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", 1, -1)
     	b.border = border
 	--shadow
-	local back = CreateFrame("Frame", nil, b.parent)
+	local back = CreateFrame("Frame", nil, b.parent, "BackDropTemplate")
 	back:SetPoint("TOPLEFT", b, "TOPLEFT", -4, 4)
 	back:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", 4, -4)
 	back:SetFrameLevel(frame:GetFrameLevel() - 1)
-	--back:SetBackdrop(backdrop)
-	--back:SetBackdropBorderColor(0, 0, 0, 0.9)
+	back:SetBackdrop(backdrop)
+	back:SetBackdropBorderColor(0, 0, 0, 0.9)
 	b.bg = back
 	--set button styled variable
 	b.styled = true
